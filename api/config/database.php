@@ -7,9 +7,9 @@ class Database{
  
     // specify your own database credentials
     private $host = "localhost";
-    private $db_name = "sparkph_spark";
-    private $username = "sparkph_spark";
-    private $password = "sparkph_spark";
+    private $db_name = "pmdnanmafs";
+    private $username = "pmdnanmafs";
+    private $password = "uCv6w9ee8g";
     public $conn;
  
     // get the database connection
