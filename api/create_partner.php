@@ -31,11 +31,11 @@ use \Firebase\JWT\JWT;
 $data = json_decode(file_get_contents("php://input"));
  
 // set product property values
-$partner->firstname = $data->firstname;
-$partner->middlename = $data->middlename;
-$partner->lastname = $data->lastname;
-$partner->email = $data->email;
-$partner->password = $data->password;
+$partner->firstname = $data->form_fields[firstname];
+$partner->middlename = $data->form_fields[middlename];
+$partner->lastname = $data->form_fields[lastname];
+$partner->email = $data->form_fields[email];
+$partner->password = $data->form_fields[password];
 
 
  
