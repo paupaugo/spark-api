@@ -9,14 +9,14 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 // database connection will be here
 // files needed to connect to database
 include_once 'config/database.php';
-include_once 'objects/user.php';
+include_once 'objects/partner.php';
  
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
  
 // instantiate product object
-$user = new User($db);
+$partner = new Partner($db);
 
 // generate json web token
 include_once 'config/core.php';
@@ -31,49 +31,25 @@ use \Firebase\JWT\JWT;
 $data = json_decode(file_get_contents("php://input"));
  
 // set product property values
-$user->firstname = $data->firstname;
-$user->lastname = $data->lastname;
-$user->email = $data->email;
-$user->password = $data->password;
-$user->contact_no = $data->contact_no;
-$user->deviceToken = $data->device_token;
-// $user->gender = $data->gender;
-// $user->birthday = $data->birthday;
-// $user->plate_no = $data->plate_no;
-// $user->car_model = $data->car_model;
-// $user->car_description = $data->car_description;
-// $user->car_photo = $data->car_photo;
-// $user->driver_license = $data->driver_license;
-// !empty($user->firstname) &&
-//     !empty($user->lastname) &&
-//     !empty($user->contact_no) &&
-//     !empty($user->email) &&
-//     !empty($user->password) &&
+$partner->firstname = $data->firstname;
+$partner->middlename = $data->middlename;
+$partner->lastname = $data->lastname;
+$partner->email = $data->email;
+$partner->password = $data->password;
+
+
  
 // use the create() method here
 // create the user
-if($user->create()){
-     $token = array(
-       "iat" => $issued_at,
-       "exp" => $expiration_time,
-       "iss" => $issuer,
-       "data" => array(
-           "id" => $user->id,
-           "firstname" => $user->firstname,
-           "lastname" => $user->lastname,
-           "email" => $user->email,
-           "contact_no" => $user->contact_no
-           
-       )
-    );
- 
+if($partner->create()){
+     
  
     // set response code
     http_response_code(200);
-    $jwt = JWT::encode($token, $key);
+
  
     // display message: user was created
-    echo json_encode(array("message" => "User was created.", "jwt" => $jwt));
+    echo json_encode(array("message" => "Partner was created."));
 }
  
 // message if unable to create user
